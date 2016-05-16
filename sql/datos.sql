@@ -1,0 +1,1 @@
+insert into usuarios values('lenis',MD5('prueba'));

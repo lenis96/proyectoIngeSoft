@@ -1,6 +1,7 @@
 drop table if exists usuarios;
 create table usuarios(
-	usuario varchar(20),
-	password char(33) not null,
-	primary key(usuario)
+	usuario varchar(20) primary key,
+	password char(40) not null,
+	tipo char not null
+	#primary key(usuario)
 );

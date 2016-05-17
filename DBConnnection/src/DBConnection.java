@@ -27,4 +27,20 @@ public class DBConnection {
 			System.out.println(ex);
 		}
 	}
+	public boolean auteticar(String user,String password){
+		try{
+			String query="select * from usuarios where usuario='"+user+"' and password=SHA('"+password+"')";
+			rs=st.executeQuery(query);
+			rs.last();
+			if(rs.getRow()==1){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}catch(Exception ex){
+			System.out.println(ex);
+			return false;
+		}
+	}
 }

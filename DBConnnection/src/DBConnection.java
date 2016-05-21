@@ -9,7 +9,7 @@ public class DBConnection {
 			con=DriverManager.getConnection("jdbc:mysql://192.168.0.106:3306/SIGEINM","SIGEINM","SIGEINM");
 			st=con.createStatement();
 		}catch(Exception ex){
-			System.out.println("Error: "+ex);
+			System.out.println("Error: conexion");
 		} 
 	}
 	public void getData(){

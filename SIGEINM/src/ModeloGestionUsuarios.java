@@ -14,4 +14,14 @@ public class ModeloGestionUsuarios extends DataBaseConnection{
 			return false;
 		}
 	}
+	String getTipoUsuario(String user){
+		try{
+			PreparedStatement statement=getConnection().prepareStatement("select tipo from usuarios where usuario='"+user+"'");
+			ResultSet result=statement.executeQuery();
+			result.next();
+			return result.getString("tipo");
+		}catch(Exception ex){
+			return "N";
+		}
+	}
 }

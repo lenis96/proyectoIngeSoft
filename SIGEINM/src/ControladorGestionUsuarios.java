@@ -50,8 +50,19 @@ public class ControladorGestionUsuarios extends JFrame implements ActionListener
 	public void actionPerformed(ActionEvent event){
 		if(event.getSource()==botonIngreso){
 			if(modelo.verificarUsuario(userInput.getText(), passwordInput.getText())){
-				label.setText("Ingesaste al sistema");
+				label.setText("");
 				label.setSize(label.getPreferredSize());
+				String user=userInput.getText();
+				userInput.setText("");
+				passwordInput.setText("");
+				String tipo=modelo.getTipoUsuario(user);
+				System.out.println(tipo);
+				if(tipo.equals("R")){
+					new ControladorGestionInmuebles(this,user);
+				}
+				else{
+					System.out.println("nada");
+				}
 			}
 			else{
 				label.setText("Usuario o contraseña incorrecta");

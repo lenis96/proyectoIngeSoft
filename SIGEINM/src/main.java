@@ -13,9 +13,9 @@ public class main {
 		//LoginWindow window=new LoginWindow();
 		//new InmueblesWindow();
 		 */
-		ModeloGestionUsuarios a=new ModeloGestionUsuarios();
-		System.out.println(a.verificarUsuario("lenis", "prueba"));
-
+		//ModeloGestionUsuarios a=new ModeloGestionUsuarios();
+		//System.out.println(a.verificarUsuario("lenis", "prueba"));
+		ControladorGestionUsuarios a=new ControladorGestionUsuarios();
 	}
 
 }

@@ -6,11 +6,14 @@ public class DBConnection {
 	public DBConnection(){
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
-			con=DriverManager.getConnection("jdbc:mysql://192.168.0.106:3306/SIGEINM","SIGEINM","SIGEINM");
+			con=DriverManager.getConnection("jdbc:mysql://192.168.250.235:3306/SIGEINM","SIGEINM","SIGEINM");
 			st=con.createStatement();
 		}catch(Exception ex){
 			System.out.println("Error: conexion");
 		} 
+	}
+	public Statement getStatement(){
+		return st;
 	}
 	public void getData(){
 		try{

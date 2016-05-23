@@ -9,7 +9,8 @@ public class main {
 		//connection.getData();
 		//System.out.println(connection.auteticar("lenis", "prueba"));
 		//System.out.println("bien");
-		LoginWindow window=new LoginWindow();
+		//LoginWindow window=new LoginWindow();
+		new InmueblesWindow();
 
 	}
 

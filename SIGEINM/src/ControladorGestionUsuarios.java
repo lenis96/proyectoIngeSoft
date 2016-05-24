@@ -57,12 +57,7 @@ public class ControladorGestionUsuarios extends JFrame implements ActionListener
 				passwordInput.setText("");
 				String tipo=modelo.getTipoUsuario(user);
 				System.out.println(tipo);
-				if(tipo.equals("R")){
-					new ControladorGestionInmuebles(this,user);
-				}
-				else{
-					System.out.println("nada");
-				}
+				new ControladorGestionInmuebles(this,user);
 			}
 			else{
 				label.setText("Usuario o contraseña incorrecta");

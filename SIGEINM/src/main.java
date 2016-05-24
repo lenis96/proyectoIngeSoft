@@ -15,8 +15,8 @@ public class main {
 		 */
 		//ModeloGestionUsuarios a=new ModeloGestionUsuarios();
 		//System.out.println(a.verificarUsuario("lenis", "prueba"));
-		//ControladorGestionUsuarios a=new ControladorGestionUsuarios();
-		new ControladorGestionInmuebles(null, "lenis");
+		ControladorGestionUsuarios a=new ControladorGestionUsuarios();
+		//new ControladorGestionInmuebles(null, "lenis");
 	}
 
 }

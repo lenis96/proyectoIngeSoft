@@ -32,7 +32,7 @@ public class ControladorGestionInmuebles extends JDialog implements ActionListen
 	
 	void createTable(){
 		String [][] datos={{}};
-		String [] cabezera={"id","direccion","precio","otro"};
+		String [] cabezera={"ID","DIRECCION","PRECIO","USUARIO"};
 		modeloTabla.setDataVector(new String[0][4], cabezera);
 		JScrollPane scrollPane=new JScrollPane(tabla);
 		scrollPane.setPreferredSize(tabla.getPreferredSize());

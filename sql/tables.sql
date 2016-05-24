@@ -8,7 +8,14 @@ create table usuarios(
 );
 create table inmuebles(
 	id serial primary key,
-	direccion varchar(50) not null,
+	direccion varchar(40) not null,
+	lugarReferencia varchar(40),
+	tamano int,
+	estrato int,
+	tipo char,
+	habitaciones int,
+	idUsuario varchar(20),
 	precio int not null,
-	otro varchar(50)
+	check (estrato>=0 and estrato<=6),
+	foreign key (idUsuario) references usuarios(usuario)
 );

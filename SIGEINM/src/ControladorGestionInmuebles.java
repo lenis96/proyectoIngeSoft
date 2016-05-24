@@ -7,6 +7,7 @@ public class ControladorGestionInmuebles extends JDialog implements ActionListen
 	private JButton mostrarInmueblesBoton=new JButton("mostrar inmuebles");
 	private DefaultTableModel modeloTabla=new DefaultTableModel();
 	private JTable tabla=new JTable(modeloTabla);
+	private ModeloGestionInmuebles modelo=new ModeloGestionInmuebles();
 	public ControladorGestionInmuebles(JFrame parent,String user) {
 		super(parent,"GestionInmuebles",true);
 		setSize(400,600);
@@ -44,6 +45,7 @@ public class ControladorGestionInmuebles extends JDialog implements ActionListen
 	public void actionPerformed(ActionEvent event){
 		if(event.getSource()==mostrarInmueblesBoton){
 			System.out.println("mostrar Inmuebles");
+			tabla.setModel(modelo.obtenerInmuebles());
 		}
 	}
 }

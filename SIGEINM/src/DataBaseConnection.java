@@ -2,8 +2,8 @@ import java.sql.*;
 public class DataBaseConnection {
 	private String user="SIGEINM";
 	private String password="SIGEINM";
-	private String db="SIGEINM";
-	private String host="192.168.250.198";
+	private String db="sigeinm";
+	private String host="192.168.250.215";
 	private Connection connection;
 	public DataBaseConnection() {
 		try{

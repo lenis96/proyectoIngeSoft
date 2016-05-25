@@ -3,7 +3,7 @@ public class DataBaseConnection {
 	private String user="SIGEINM";
 	private String password="SIGEINM";
 	private String db="sigeinm";
-	private String host="192.168.250.215";
+	private String host="127.0.0.1";
 	private Connection connection;
 	public DataBaseConnection() {
 		try{

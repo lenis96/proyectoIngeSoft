@@ -60,7 +60,7 @@ public class ControladorGestionUsuarios extends JFrame implements ActionListener
 				new ControladorGestionInmuebles(this,user);
 			}
 			else{
-				label.setText("Usuario o contraseÃ±a incorrecta");
+				label.setText("Usuario o contraseña incorrecta");
 				label.setSize(label.getPreferredSize());
 			}
 		}

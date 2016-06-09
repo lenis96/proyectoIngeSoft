@@ -1,0 +1,35 @@
+/*************************************************
+
+Nombre de la clase: ControladorGestionUsuarios.java
+
+Última modificación: 06/06/2016
+
+Descripción: Tiene la tarea de desplegar la ventana
+	de ingreso a la aplicación junto con los campos
+	respectivos para el usuario y contraseña.
+
+*************************************************/
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
+public class ControladorArgegarObjeto extends JDialog implements ActionListener {
+	JTextField objetoInput=new JTextField();
+	JButton agrgarObjetos=new JButton("agrgarObjeto");
+	public ControladorArgegarObjeto(JDialog parent) {
+		super(parent,"agrgar Objeto");
+		setSize(300,200);
+		setLayout(null);
+		
+		JLabel label=new JLabel("ingrese el nuevo objeto");
+		label.setSize(label.getPreferredSize());
+		label.setLocation(10, 10);
+		add(label);
+		
+		this.setVisible(true);
+	}
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

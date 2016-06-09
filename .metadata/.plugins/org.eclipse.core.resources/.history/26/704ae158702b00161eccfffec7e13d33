@@ -1,0 +1,18 @@
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+public class ControladorInventarios extends JDialog {
+	private DefaultTableModel modeloTabla=new DefaultTableModel();
+	private JTable tabla=new JTable(modeloTabla);
+	public ControladorInventarios(JDialog parent,String user) {
+		super(parent,"GestionInmuebles",true);
+		setSize(600,600);
+		setLocation(100, 100);
+		setLayout(null);
+		//setDefaultCloseOperation(JDialog.EXIT_ON_CLOSE);
+		JLabel label=new JLabel("usuario: "+user);
+		label.setSize(label.getPreferredSize());
+		label.setLocation(10, 10);
+		add(label);
+		setVisible(true);
+	}
+}

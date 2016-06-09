@@ -1,0 +1,53 @@
+import java.awt.event.*;
+import javax.swing.*;
+public class ControladorEspacios extends JDialog implements ActionListener,MouseListener {
+	
+	public ControladorEspacios(JDialog parent,int idInmueble) {
+		super(parent,"GestionInmuebles",true);
+		setSize(600,600);
+		setLocation(100, 100);
+		setLayout(null);
+		//setDefaultCloseOperation(JDialog.EXIT_ON_CLOSE);
+		JLabel label=new JLabel("usuario: ");
+		label.setSize(label.getPreferredSize());
+		label.setLocation(10, 10);
+		add(label);
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

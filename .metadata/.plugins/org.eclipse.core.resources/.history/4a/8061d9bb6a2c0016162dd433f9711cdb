@@ -1,0 +1,101 @@
+import java.awt.event.*;
+import java.security.IdentityScope;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+public class ControladorEspacios extends JDialog implements ActionListener,MouseListener {
+	private ModeloInventarios modelo;
+	private int idInmueble;
+	private DefaultTableModel modeloTabla=new DefaultTableModel();
+	private JTable tabla=new JTable(modeloTabla);
+	private int instancia;
+	private int espacio;
+	private int idInventario;
+	private JButton botonEditarInventario=new JButton("editar");
+	private String tipo;
+	public ControladorEspacios(JDialog parent,int idInmueble,ModeloInventarios modelo,String tipo) {
+		super(parent,"",true);
+		this.modelo=modelo;
+		this.idInmueble=idInmueble;
+		this.idInventario=modelo.getIdInventario(idInmueble);
+		setSize(400,400);
+		setLocation(130, 100);
+		setLayout(null);
+		//setDefaultCloseOperation(JDialog.EXIT_ON_CLOSE);
+		JLabel label=new JLabel("id: "+String.valueOf(idInmueble)+"  direccion: "+modelo.getDireccionInmueble(idInmueble));
+		label.setSize(label.getPreferredSize());
+		label.setLocation(10, 10);
+		add(label);
+		createTable();
+		tabla.setModel(modelo.obtenerInstanciasInventarios(idInmueble));
+		botonEditarInventario.setSize(botonEditarInventario.getPreferredSize());
+		botonEditarInventario.setLocation(230,100);
+		botonEditarInventario.addActionListener(this);
+		botonEditarInventario.setEnabled(false);
+		add(botonEditarInventario);
+		setVisible(true);
+	}
+	void createTable(){
+		String [][] datos={{}};
+		String [] cabezera={"ESPACIO","NUMERO"};
+		modeloTabla.setDataVector(new String[0][2], cabezera);
+		tabla.addMouseListener(this);
+		JScrollPane scrollPane=new JScrollPane(tabla);
+		scrollPane.setPreferredSize(tabla.getPreferredSize());
+		add(scrollPane);
+		scrollPane.setSize(200, 300);
+		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scrollPane.setLocation(10, 40);
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		if(e.getButton()==1){
+			int fila=tabla.rowAtPoint(e.getPoint());
+			System.out.println(tabla.getValueAt(fila, 0));
+			if(fila>-1){
+				instancia=Integer.parseInt(tabla.getValueAt(fila, 1).toString());
+				espacio=modelo.getIdEspacio(tabla.getValueAt(fila, 0).toString());
+				botonEditarInventario.setEnabled(true);
+			}
+		}
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource()==botonEditarInventario){
+			if(modelo.InformacionCreadaInventario(idInventario, espacio, instancia)){
+				new ControladorInventarioEspacio(this, modelo, idInmueble, idInventario, espacio, instancia, "E");
+			}
+			else{
+				new ControladorInventarioEspacio(this, modelo, idInmueble, idInventario, espacio, instancia, "G");
+			}
+		}
+	}
+
+}

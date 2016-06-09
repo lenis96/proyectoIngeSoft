@@ -1,0 +1,19 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
+public class ControladorOpciones extends JDialog implements ActionListener {
+	JButton inmueblesBoton=new JButton("Inmuebles");
+	public ControladorOpciones(JFrame parent,String tipo,String usuario) {
+		super(parent,"Opciones");
+		setSize(200,300);
+		setLayout(null);
+		
+		setVisible(true);
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

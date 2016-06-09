@@ -1,27 +1,47 @@
+/*************************************************
+
+Nombre de la clase: ControladorEdicionInmuebles.java
+
+Última modificación: 06/06/2016
+
+Descripción: Controla el despliegue y funcionamiento
+	de la interfaz para editar un inmueble existente.
+
+*************************************************/
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.*;
+
 public class ControladorEdicionInmuebles extends JDialog implements ActionListener {
 	
-	JLabel label=new JLabel();
-	JTextField direccionInput=new JTextField();
-	JTextField lugarReferenciaInput=new JTextField();
-	JTextField tamanoInput=new JTextField();
-	JTextField estratoInput=new JTextField();
-	JTextField tipoInput=new JTextField();
-	JTextField habitacionesInput=new JTextField();
-	JTextField usuarioInput=new JTextField();
-	JTextField precioInput=new JTextField();
-	ModeloGestionInmuebles modelo;
-	int idInmueble=-1;
-	public ControladorEdicionInmuebles(JDialog parent,ModeloGestionInmuebles modelo) {
+	private JLabel label=new JLabel();
+	private String id;
+	private JTextField direccionInput=new JTextField();
+	private JTextField lugarReferenciaInput=new JTextField();
+	private JFormattedTextField tamanoInput=new JFormattedTextField(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+	private String[] estratos={"1","2","3","4","5","6"};
+	private JComboBox estratoInput=new JComboBox(estratos);
+	private String[] tipos={"Apartamento","Casa"};
+	private JComboBox tipoInput=new JComboBox(tipos);
+	private JTextField habitacionesInput=new JTextField();
+	private String[] usuarios={""};//modelo.getUsuariosInmueble();
+	private  JComboBox usuarioInput=new JComboBox(usuarios);
+	private JButton guardarInformacionBoton=new JButton("Guardar");
+	private JFormattedTextField precioInput=new JFormattedTextField(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+	private ModeloGestionInmuebles modelo;
+	private int idInmueble=-1;
+	private String tipo;
+	public ControladorEdicionInmuebles(JDialog parent,ModeloGestionInmuebles modelo,String tipo) {
 		super(parent,"Edicion Inmuebles",true);
+		this.modelo=modelo;
+		this.tipo=tipo;
 		mostrarInformacion();
 	}
-	public ControladorEdicionInmuebles(JDialog parent, ModeloGestionInmuebles modelo,int idInmueble){
+	public ControladorEdicionInmuebles(JDialog parent, ModeloGestionInmuebles modelo,int idInmueble,String tipo){
 		super(parent,"Edicion Inmuebles",true);
+		this.tipo=tipo;
 		label.setText("ID: "+String.valueOf(idInmueble));
+		id=String.valueOf(idInmueble);
 		label.setSize(label.getPreferredSize());
 		label.setLocation(10,10);
 		add(label);
@@ -34,15 +54,17 @@ public class ControladorEdicionInmuebles extends JDialog implements ActionListen
 		setSize(400,400);
 		setLocation(100,100);
 		setLayout(null);
+		usuarioInput=new JComboBox(modelo.getUsuariosInmueble());
 		if(idInmueble!=-1){
 			String [] datos=modelo.getDataInmueble(idInmueble);
 			direccionInput.setText(datos[1]);
 			lugarReferenciaInput.setText(datos[2]);
 			tamanoInput.setText(datos[3]);
-			estratoInput.setText(datos[4]);
-			tipoInput.setText(datos[5]);
+			estratoInput.setSelectedItem(datos[4]);
+			//estratoInput.setText(datos[4]);
+			tipoInput.setSelectedItem(datos[5]);
 			habitacionesInput.setText(datos[6]);
-			usuarioInput.setText(datos[7]);
+			usuarioInput.setSelectedItem(datos[7]);
 			precioInput.setText(datos[8]);
 		}
 		label=new JLabel("Direccion: ");
@@ -63,19 +85,19 @@ public class ControladorEdicionInmuebles extends JDialog implements ActionListen
 		add(label);
 		label=new JLabel("Tipo: ");
 		label.setSize(label.getPreferredSize());
-		label.setLocation(10,120);
+		label.setLocation(10,130);
 		add(label);
 		label=new JLabel("Habitaciones: ");
 		label.setSize(label.getPreferredSize());
-		label.setLocation(10,140);
+		label.setLocation(10,160);
 		add(label);
 		label=new JLabel("Usuario: ");
 		label.setSize(label.getPreferredSize());
-		label.setLocation(10,160);
+		label.setLocation(10,180);
 		add(label);
 		label=new JLabel("Precio: ");
 		label.setSize(label.getPreferredSize());
-		label.setLocation(10,180);
+		label.setLocation(10,210);
 		add(label);
 		
 		
@@ -91,32 +113,86 @@ public class ControladorEdicionInmuebles extends JDialog implements ActionListen
 		tamanoInput.setSize(tamanoInput.getPreferredSize());
 		tamanoInput.setLocation(x, 80);
 		add(tamanoInput);
-		estratoInput.setColumns(20);
+		//estratoInput.setColumns(20);
 		estratoInput.setSize(estratoInput.getPreferredSize());
 		estratoInput.setLocation(x, 100);
 		add(estratoInput);
-		tipoInput.setColumns(20);
+		//tipoInput.setColumns(20);
 		tipoInput.setSize(tipoInput.getPreferredSize());
-		tipoInput.setLocation(x, 120);
+		tipoInput.setLocation(x, 130);
 		add(tipoInput);
 		habitacionesInput.setColumns(20);
 		habitacionesInput.setSize(habitacionesInput.getPreferredSize());
-		habitacionesInput.setLocation(x, 140);
+		habitacionesInput.setLocation(x, 160);
 		add(habitacionesInput);
-		usuarioInput.setColumns(20);
+		//usuarioInput.setColumns(20);
+		
 		usuarioInput.setSize(usuarioInput.getPreferredSize());
-		usuarioInput.setLocation(x, 160);
+		usuarioInput.setLocation(x, 180);
 		add(usuarioInput);
 		precioInput.setColumns(20);
 		precioInput.setSize(precioInput.getPreferredSize());
-		precioInput.setLocation(x, 180);
+		precioInput.setLocation(x, 210);
 		add(precioInput);
+		if(tipo.equals("R")){
+		guardarInformacionBoton.setSize(guardarInformacionBoton.getPreferredSize());
+		guardarInformacionBoton.setLocation(10, 250);
+		guardarInformacionBoton.addActionListener(this);
+		add(guardarInformacionBoton);
+		}
 		
 		setVisible(true);
 	}
-	
+	boolean camposLlenos(){
+		boolean ok=true;
+		if(direccionInput.getText().equals("")){
+			ok=false;
+			JOptionPane.showMessageDialog(this,"El campo de direccion no puede estar vacio");
+		}
+		else if(tamanoInput.getText().equals("")){
+			ok=false;
+			JOptionPane.showMessageDialog(this,"El campo de tamaño no puede estar vacio");
+		}
+		else if(habitacionesInput.getText().equals("")){
+			ok=false;
+			JOptionPane.showMessageDialog(this,"El campo de habitaciones no puede estar vacio");
+		}
+		else if(precioInput.getText().equals("")){
+			ok=false;
+			JOptionPane.showMessageDialog(this,"El campo de precio no puede estar vacio");
+		}
+		return ok;
+	}
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		if(e.getSource()==guardarInformacionBoton){
+			String tipo="";
+			if(tipoInput.getSelectedItem().equals("Apartamento")){
+				tipo="A";
+			}
+			else if(tipoInput.getSelectedItem().equals("Casa")){
+				tipo="C";
+			}
+			if(camposLlenos()){
+				if(idInmueble!=-1){
+					if(modelo.ActualizarInformacionInmueble(id, direccionInput.getText(), lugarReferenciaInput.getText(), tamanoInput.getText(), String.valueOf(estratoInput.getSelectedItem()), tipo, habitacionesInput.getText(), String.valueOf(usuarioInput.getSelectedItem()), precioInput.getText())){
+						JOptionPane.showMessageDialog(this,"Informacion del inmueble actualizada");
+					}
+					else{
+						JOptionPane.showMessageDialog(this,"No fue posible actulizar la informacion del inmueble");
+					}
+				}
+				else{
+					if(modelo.InsertarInformacionInmueble(id, direccionInput.getText(), lugarReferenciaInput.getText(), tamanoInput.getText(), String.valueOf(estratoInput.getSelectedItem()), tipo, habitacionesInput.getText(), String.valueOf(usuarioInput.getSelectedItem()), precioInput.getText())){
+						JOptionPane.showMessageDialog(this, "Se pudo insertar la informacion del nuevo muebles");
+						this.dispose();
+					}
+					else{
+						JOptionPane.showMessageDialog(this, "No se pudó insertar el nuevo inmuebles");
+					}
+				}
+			}
+			
+		}
 		
 	}
 

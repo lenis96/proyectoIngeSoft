@@ -1,6 +1,18 @@
+/*************************************************
+
+Nombre de la clase: ControladorGestionUsuarios.java
+
+Última modificación: 06/06/2016
+
+Descripción: Tiene la tarea de desplegar la ventana
+	de ingreso a la aplicación junto con los campos
+	respectivos para el usuario y contraseña.
+
+*************************************************/
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 public class ControladorGestionUsuarios extends JFrame implements ActionListener{
 	JTextField userInput=new JTextField();
 	JPasswordField passwordInput=new JPasswordField();
@@ -57,7 +69,9 @@ public class ControladorGestionUsuarios extends JFrame implements ActionListener
 				passwordInput.setText("");
 				String tipo=modelo.getTipoUsuario(user);
 				System.out.println(tipo);
-				new ControladorGestionInmuebles(this,user);
+				this.setVisible(false);
+				new ControladorOpciones(this,modelo.getTipoUsuario(user),user);
+				this.setVisible(true);
 			}
 			else{
 				label.setText("Usuario o contraseña incorrecta");

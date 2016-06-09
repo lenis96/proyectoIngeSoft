@@ -1,0 +1,5 @@
+import java.awt.event.ActionListener;
+import javax.swing.*;
+public class ControladorOpciones extends JDialog implements ActionListener {
+
+}

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;ControladorArgegarObjeto&apos; to &apos;ControladorAgregarObjeto&apos;&#x0D;&#x0A;- Original project: &apos;SIGEINM&apos;&#x0D;&#x0A;- Original element: &apos;ControladorArgegarObjeto&apos;&#x0D;&#x0A;- Renamed element: &apos;ControladorAgregarObjeto&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;ControladorArgegarObjeto&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;{ControladorArgegarObjeto.java[ControladorArgegarObjeto" matchStrategy="1" name="ControladorAgregarObjeto" qualified="false" references="true" similarDeclarations="false" stamp="1465308109572" textual="false" version="1.0"/>
+</session>

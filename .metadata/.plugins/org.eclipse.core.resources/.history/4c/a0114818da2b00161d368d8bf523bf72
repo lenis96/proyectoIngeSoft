@@ -1,0 +1,57 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.*;
+public class ControladorCrearInventario extends JDialog implements ActionListener{
+	private int idInmueble;
+	private String[] cantidades={"0","1","2","3","4","5"};
+	private JComboBox cantidadCocinasInput=new JComboBox(cantidades);
+	private JComboBox cantidadSalasInput=new JComboBox(cantidades);
+	private JComboBox cantidadHabitacionesInput=new JComboBox(cantidades);
+	private JComboBox cantidadBanosInput=new JComboBox(cantidades);
+	private JButton crearInventarioBoton=new JButton("crear Inventario");
+	private ModeloInventarios modelo;
+	public ControladorCrearInventario(JDialog parent,int idInmueble,ModeloInventarios modelo) {
+		super(parent);
+		this.modelo=modelo;
+		this.idInmueble=idInmueble;
+		setSize(400,400);
+		setLocation(100, 100);
+		setLayout(null);
+		
+		
+		JLabel label=new JLabel("id: "+String.valueOf(idInmueble)+"  direccion: "+modelo.getDireccionInmueble(idInmueble));
+		label.setSize(label.getPreferredSize());
+		label.setLocation(10, 10);
+		add(label);
+		
+		String[] espacios=modelo.obtenerEspaciosDefault();
+		JComboBox[] espaciosInputs=new JComboBox<String>()[espacios.length];
+		for(int i=0;i<espacios.length;i++){
+			label=new JLabel("numero de "+espacios[i]+":");
+			label.setSize(label.getPreferredSize());
+			label.setLocation(10, (i*30)+50);
+			add(label);
+			cantidadCocinasInput.setSize(cantidadCocinasInput.getPreferredSize());
+			cantidadCocinasInput.setLocation(160, 50);
+			add(cantidadCocinasInput);
+		}
+		
+		
+		
+		crearInventarioBoton.setSize(crearInventarioBoton.getPreferredSize());
+		crearInventarioBoton.setLocation(10, 170);
+		crearInventarioBoton.addActionListener(this);
+		add(crearInventarioBoton);
+		
+		setVisible(true);
+		
+	}
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource()==crearInventarioBoton){
+			System.out.println(cantidadSalasInput.getSelectedItem()+" "+cantidadCocinasInput.getSelectedItem()+" "+cantidadHabitacionesInput.getSelectedItem()+" "+cantidadBanosInput.getSelectedItem()+" ");
+		}
+		
+	}
+
+}

@@ -1,3 +1,12 @@
-/ModelosGestionInmuebles.class
-/ModeloGestionInmuebles.class
 /ControladorEdicionInmuebles.class
+/ControladorGestionInmuebles.class
+/ControladorGestionUsuarios.class
+/ModeloGestionInmuebles.class
+/ControladorInventarios.class
+/ModeloInventarios.class
+/ControladorCrearInventario.class
+/ControladorEspacios.class
+/ControladorInventarioEspacio.class
+/ControladorOpciones.class
+/ControladorArgegarObjeto.class
+/ControladorAgregarObjeto.class

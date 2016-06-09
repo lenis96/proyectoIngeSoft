@@ -1,0 +1,24 @@
+import java.sql.*;
+public class main {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		/*
+		DBConnection connection=new DBConnection();
+		connection.getData();
+		System.out.println(connection.auteticar("lenis", "prueba"));
+		System.out.println("bien");
+		//LoginWindow window=new LoginWindow();
+		//new InmueblesWindow();
+		 */
+		//ModeloGestionUsuarios a=new ModeloGestionUsuarios();
+		//System.out.println(a.verificarUsuario("lenis", "prueba"));
+		//ControladorGestionUsuarios a=new ControladorGestionUsuarios();
+		//new ControladorGestionInmuebles(null, "lenis");
+		//new ControladorInventarios(null, "carlos");
+		new ControladorCrearInventario(null, 1);
+	}
+
+}

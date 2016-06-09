@@ -1,0 +1,73 @@
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+public class ControladorEspacios extends JDialog implements ActionListener,MouseListener {
+	private ModeloInventarios modelo;
+	private int idInmueble;
+	private DefaultTableModel modeloTabla=new DefaultTableModel();
+	private JTable tabla=new JTable(modeloTabla);
+	public ControladorEspacios(JDialog parent,int idInmueble,ModeloInventarios modelo) {
+		this.modelo=modelo;
+		this.idInmueble=idInmueble;
+		setSize(400,400);
+		setLocation(100, 100);
+		setLayout(null);
+		//setDefaultCloseOperation(JDialog.EXIT_ON_CLOSE);
+		JLabel label=new JLabel("id: "+String.valueOf(idInmueble)+"  direccion: "+modelo.getDireccionInmueble(idInmueble));
+		label.setSize(label.getPreferredSize());
+		label.setLocation(10, 10);
+		add(label);
+		createTable();
+		tabla.setModel(modelo.obtenerInstanciasInventarios(idInmueble));
+		setVisible(true);
+	}
+	void createTable(){
+		String [][] datos={{}};
+		String [] cabezera={"ESPACIO","NUMERO"};
+		modeloTabla.setDataVector(new String[0][2], cabezera);
+		tabla.addMouseListener(this);
+		JScrollPane scrollPane=new JScrollPane(tabla);
+		scrollPane.setPreferredSize(tabla.getPreferredSize());
+		add(scrollPane);
+		scrollPane.setSize(200, 300);
+		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scrollPane.setLocation(10, 40);
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

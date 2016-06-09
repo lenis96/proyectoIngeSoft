@@ -1,0 +1,16 @@
+/*************************************************
+
+Nombre de la clase: ControladorGestionUsuarios.java
+
+Última modificación: 06/06/2016
+
+Descripción: Tiene la tarea de desplegar la ventana
+	de ingreso a la aplicación junto con los campos
+	respectivos para el usuario y contraseña.
+
+*************************************************/
+import java.awt.event.ActionListener;
+import javax.swing.*;
+public class ControladorArgegarObjeto extends JDialog implements ActionListener {
+
+}

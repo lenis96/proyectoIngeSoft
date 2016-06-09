@@ -1,0 +1,9 @@
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+public class ControladorInventarios extends JDialog {
+	private DefaultTableModel modeloTabla=new DefaultTableModel();
+	private JTable tabla=new JTable(modeloTabla);
+	public ControladorInventarios(JDialog parent,String user) {
+		
+	}
+}

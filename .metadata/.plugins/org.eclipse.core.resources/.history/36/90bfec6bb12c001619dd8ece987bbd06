@@ -1,0 +1,44 @@
+/*************************************************
+
+Nombre de la clase: ModeloGestionUsuarios.java
+
+Última modificación: 06/06/2016
+
+Descripción: Realiza la validación de las credenciales
+	de los usuarios refiriéndose a la base de datos	para ello.
+
+*************************************************/
+import java.sql.*;
+public class ModeloGestionUsuarios extends DataBaseConnection{
+	public ModeloGestionUsuarios() {
+		super();
+	}
+	boolean verificarUsuario(String user,String password){
+		/*
+		 * Funcion que retorna true si el usuario ingrsadp coincide con la contraseña utilizada
+		 * retorna false en caso contrario o que no se puede realizar la conexion con la base de datos
+		 */
+		try{
+			PreparedStatement statement=getConnection().prepareStatement("select count(*) as total from usuarios where usuario='"+user+"' and password=SHA('"+password+"')");
+			ResultSet result=statement.executeQuery();
+			result.next();
+			return (result.getInt("total")==1);
+		}catch(SQLException ex){
+			MostrarError(ex);
+			return false;
+		}
+	}
+	String getTipoUsuario(String user){
+		/*
+		 * Funcion que retorna el tipo de usuario dado el nombre que es ingresado
+		 */
+		try{
+			PreparedStatement statement=getConnection().prepareStatement("select tipo from usuarios where usuario='"+user+"'");
+			ResultSet result=statement.executeQuery();
+			result.next();
+			return result.getString("tipo");
+		}catch(Exception ex){
+			return "N";
+		}
+	}
+}

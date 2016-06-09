@@ -1,22 +1,19 @@
+/*************************************************
+
+Nombre de la clase: main.java
+
+Última modificación: 06/06/2016
+
+Descripción: Clase sencilla para lanzar la aplicación.
+
+*************************************************/
 import java.sql.*;
 public class main {
-
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		/*
-		DBConnection connection=new DBConnection();
-		connection.getData();
-		System.out.println(connection.auteticar("lenis", "prueba"));
-		System.out.println("bien");
-		//LoginWindow window=new LoginWindow();
-		//new InmueblesWindow();
-		 */
-		//ModeloGestionUsuarios a=new ModeloGestionUsuarios();
-		//System.out.println(a.verificarUsuario("lenis", "prueba"));
 		ControladorGestionUsuarios a=new ControladorGestionUsuarios();
-		//new ControladorGestionInmuebles(null, "lenis");
 	}
 
 }

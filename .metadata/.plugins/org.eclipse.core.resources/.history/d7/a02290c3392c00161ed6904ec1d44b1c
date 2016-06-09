@@ -1,0 +1,159 @@
+import java.awt.Dimension;
+import java.awt.Label;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.*;
+public class ControladorInventarioEspacio extends JDialog implements ActionListener {
+	ModeloInventarios modelo;
+	JComboBox[] estadosInput;
+	JComboBox[] cantidadesInput;
+	JTextField[] observacionesInput;
+	JTextField[] otroMaterialInput;
+	JComboBox[] materialesInput;
+	int[] indicesObjetos;
+	JPanel panel=new JPanel();
+	JButton guardar=new JButton("Guardar");
+	String modo;
+	int idInmueble;
+	int idEspacio;
+	public ControladorInventarioEspacio(JDialog parent,ModeloInventarios modelo,int idInmueble,int idInventario,int idEspacio,int instancia,String modo) {
+		super(parent);
+		this.modelo=modelo;
+		this.modo=modo;
+		this.idInmueble=idInmueble;
+		this.idEspacio=idEspacio;
+		setLayout(null);
+		setSize(600,600);
+		setLocation(100,100);
+		JLabel label=new JLabel(modelo.getEspacio(idEspacio)+" "+String.valueOf(instancia));
+		label.setSize(label.getPreferredSize());
+		label.setLocation(10,10);
+		add(label);
+		panel.setLayout(null);
+		String[] estados={"B","R","M"};
+		String[] cantidades={"0","1","2","3","4","5"};
+		String[] objetos=modelo.obtenerObjetosEspacio(idEspacio);
+		indicesObjetos=modelo.obtenerIds(idEspacio);
+		estadosInput=new JComboBox[objetos.length];
+		cantidadesInput=new JComboBox[objetos.length];
+		observacionesInput=new JTextField[objetos.length];
+		materialesInput=new JComboBox[objetos.length];
+		otroMaterialInput=new JTextField[objetos.length];
+		int i;
+		label=new JLabel("Objeto");
+		label.setSize(label.getPreferredSize());
+		label.setLocation(10, 10);
+		panel.add(label);
+		label=new JLabel("Estado");
+		label.setSize(label.getPreferredSize());
+		label.setLocation(90, 10);
+		panel.add(label);
+		label=new JLabel("Cantidad");
+		label.setSize(label.getPreferredSize());
+		label.setLocation(140, 10);
+		panel.add(label);
+		label=new JLabel("Observacion");
+		label.setSize(label.getPreferredSize());
+		label.setLocation(230, 10);
+		panel.add(label);
+		label=new JLabel("Material");
+		label.setSize(label.getPreferredSize());
+		label.setLocation(410, 10);
+		panel.add(label);
+		label=new JLabel("Otro material");
+		label.setSize(label.getPreferredSize());
+		label.setLocation(530, 10);
+		panel.add(label);
+		String[][] informacion=modelo.obtenerInformacionObjetos(idInventario);
+		for(i=0;i<objetos.length;i++){
+			if(modo.equals("E")){
+				label=new JLabel(informacion[i][0]);
+			}
+			else{
+				label=new JLabel(objetos[i]);
+			}
+			label.setSize(label.getPreferredSize());
+			label.setLocation(10, (30*i)+30);
+			panel.add(label);
+			estadosInput[i]=new JComboBox(estados);
+			estadosInput[i].setSize(estadosInput[i].getPreferredSize());
+			estadosInput[i].setLocation(90, (30*i)+30);
+			panel.add(estadosInput[i]);
+			cantidadesInput[i]=new JComboBox(cantidades);
+			cantidadesInput[i].setSize(cantidadesInput[i].getPreferredSize());
+			cantidadesInput[i].setLocation(140, (30*i)+30);
+			panel.add(cantidadesInput[i]);
+			observacionesInput[i]=new JTextField();
+			observacionesInput[i].setColumns(20);
+			observacionesInput[i].setSize(observacionesInput[i].getPreferredSize());
+			observacionesInput[i].setLocation(180, (30*i)+30);
+			panel.add(observacionesInput[i]);
+			materialesInput[i]=new JComboBox(modelo.obtenerMaterialesObjeto(indicesObjetos[i]));
+			materialesInput[i].setSize(materialesInput[i].getPreferredSize());
+			materialesInput[i].setLocation(410, (i*30)+30);
+			//materialesInput[i].addActionListener(this);
+			panel.add(materialesInput[i]);
+			otroMaterialInput[i]=new JTextField();
+			otroMaterialInput[i].setColumns(15);
+			otroMaterialInput[i].setSize(otroMaterialInput[i].getPreferredSize());
+			otroMaterialInput[i].setLocation(530, (i*30)+30);
+			panel.add(otroMaterialInput[i]);
+		}
+		//panel.setSize(500,30);
+		panel.setLocation(10,300);
+		panel.setPreferredSize(new Dimension(750,(i*30)+50));
+		JScrollPane scrollPane=new JScrollPane(panel,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		
+		scrollPane.setSize(550,400);
+		scrollPane.setLocation(10, 30);
+		add(scrollPane);
+		scrollPane.revalidate(); 
+		
+		guardar.setSize(guardar.getPreferredSize());
+		guardar.setLocation(10,450);
+		guardar.addActionListener(this);
+		add(guardar);
+		if(modo.equals("E")){
+			indicesObjetos=modelo.obtenerIndicesObjetos(idInventario);
+			for(int j=0;j<indicesObjetos.length;j++){
+				estadosInput[j].setSelectedItem(informacion[j][1]);
+				cantidadesInput[j].setSelectedItem(informacion[j][2]);
+				observacionesInput[j].setText(informacion[j][3]);
+				materialesInput[j].setSelectedItem(informacion[j][4]);
+				System.out.println("j: "+j);
+			}
+		}
+		setVisible(true);
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String[] estados=new String[indicesObjetos.length];
+		String[] materiales=new String[indicesObjetos.length];
+		int[] cantidades=new int[indicesObjetos.length];
+		String[] observaciones=new String[indicesObjetos.length];
+		for(int i=0;i<indicesObjetos.length;i++){
+			estados[i]=String.valueOf(estadosInput[i].getSelectedItem());
+			if(String.valueOf(materialesInput[i].getSelectedItem()).equals("otro")){
+				materiales[i]=otroMaterialInput[i].getText();
+			}
+			else{
+				materiales[i]=String.valueOf(materialesInput[i].getSelectedItem());
+			}
+			cantidades[i]=Integer.parseInt(String.valueOf(cantidadesInput[i].getSelectedItem()));
+			observaciones[i]=observacionesInput[i].getText();
+		}
+		int[] indicesMateriales=modelo.getIndicesMateriales(materiales,indicesObjetos);
+		if(e.getSource()==guardar){
+			if(modo.equals("G")){
+				if(modelo.guardarEspacio(indicesObjetos,estados,indicesMateriales,cantidades,observaciones,idInmueble,idEspacio)){
+					JOptionPane.showMessageDialog(this,"se pudo guardar el inventario exitosamente");
+				}
+				else{
+					JOptionPane.showMessageDialog(this, "no se pudo guarda exitosamente el inventario");
+				}
+				dispose();
+			}
+		}
+	}
+}

@@ -1,0 +1,35 @@
+import java.awt.Event;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
+public class ControladorOpciones extends JDialog implements ActionListener {
+	JButton inmueblesBoton=new JButton("Inmuebles");
+	String tipo;
+	String usuario;
+	public ControladorOpciones(JFrame parent,String tipo,String usuario) {
+		super(parent,"Opciones");
+		this.tipo=tipo;
+		this.usuario=usuario;
+		setSize(200,300);
+		setLayout(null);
+		JLabel label=new JLabel("Usuario: "+usuario);
+		label.setSize(label.getPreferredSize());
+		label.setLocation(10,10);
+		add(label);
+		
+		inmueblesBoton.setSize(inmueblesBoton.getPreferredSize());
+		inmueblesBoton.setLocation(10,40);
+		inmueblesBoton.addActionListener(this);
+		add(inmueblesBoton);
+		
+		setVisible(true);
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource()==inmueblesBoton){
+			new ControladorGestionInmuebles(this, usuario,tipo);
+		}
+		
+	}
+
+}

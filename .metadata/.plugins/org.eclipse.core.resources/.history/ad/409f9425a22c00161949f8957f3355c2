@@ -1,0 +1,65 @@
+/*************************************************
+
+Nombre de la clase: ControladorOpciones.java
+
+Última modificación: 06/06/2016
+
+Descripción: Se ocupa de manejar las opciones de
+	administrar inmuebles o inventarios disponibles
+	tras ingresar a la aplicación.
+
+*************************************************/
+import java.awt.Event;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
+
+public class ControladorOpciones extends JDialog implements ActionListener {
+	JButton inmueblesBoton=new JButton("Inmuebles");
+	JButton inventariosBoton=new JButton("Inventarios");
+	JButton agrgarObjetoBoton=new JButton("Agrgar Objeto");
+	String tipo;
+	String usuario;
+	public ControladorOpciones(JFrame parent,String tipo,String usuario) {
+		super(parent,"Opciones",true);
+		this.tipo=tipo;
+		this.usuario=usuario;
+		setLocation(100, 100);
+		setSize(200,300);
+		setLayout(null);
+		JLabel label=new JLabel("Usuario: "+usuario);
+		label.setSize(label.getPreferredSize());
+		label.setLocation(10,10);
+		add(label);
+		
+		inmueblesBoton.setSize(inmueblesBoton.getPreferredSize());
+		inmueblesBoton.setLocation(10,40);
+		inmueblesBoton.addActionListener(this);
+		add(inmueblesBoton);
+		inventariosBoton.setSize(inventariosBoton.getPreferredSize());
+		inventariosBoton.setLocation(10,70);
+		inventariosBoton.addActionListener(this);
+		add(inventariosBoton);
+		if(tipo.equals("R") || tipo.equals("A")){
+			agrgarObjetoBoton.setSize(inventariosBoton.getPreferredSize());
+			agregarObjetoBoton.setLocation(10,70);
+			agrgarObjetoBoton.addActionListener(this);
+		}
+		setVisible(true);
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource()==inmueblesBoton){
+			this.setVisible(false);
+			new ControladorGestionInmuebles(this, usuario,tipo);
+			this.setVisible(true);
+		}
+		else if(e.getSource()==inventariosBoton){
+			this.setVisible(false);
+			new ControladorInventarios(this, usuario,tipo);
+			this.setVisible(true);
+		}
+		
+	}
+
+}

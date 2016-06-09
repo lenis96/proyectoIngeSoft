@@ -1,0 +1,114 @@
+import java.sql.*;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+public class ModeloGestionInmuebles extends DataBaseConnection{
+	
+	public ModeloGestionInmuebles() {
+		super();
+	}
+	public DefaultTableModel obtenerInmuebles(){
+		DefaultTableModel tableModel=new DefaultTableModel();
+		int registros=0;
+		String[] columNames={"ID","DIRECCION","PRECIO","USUARIO"};
+		try{
+			PreparedStatement statement=getConnection().prepareStatement("select count(*) as total from inmuebles");
+			
+			ResultSet respuesta=statement.executeQuery();
+			respuesta.next();
+			registros=respuesta.getInt("total");
+			respuesta.close();
+		}catch(SQLException exception){
+			System.err.println(exception.getMessage());
+		}
+		Object [][] data=new String[registros][5];
+		try{
+			PreparedStatement statement=getConnection().prepareStatement("select id,direccion,precio,idUsuario from inmuebles");
+			ResultSet respuesta=statement.executeQuery();
+			int i=0;
+			while(respuesta.next()){
+				data[i][0]=respuesta.getString("id");
+				data[i][1]=respuesta.getString("direccion");
+				data[i][2]=respuesta.getString("precio");
+				data[i][3]=respuesta.getString("idUsuario");
+				i++;
+			}
+			respuesta.close();
+			tableModel.setDataVector(data, columNames);
+		}catch(SQLException exception){
+			System.err.println(exception.getMessage());
+		}
+		return tableModel;
+	}
+	public String[] getDataInmueble(int idInmueble){
+		String [] datos=new String[9];
+		try{
+		PreparedStatement statement=getConnection().prepareStatement("select * from inmuebles where id="+String.valueOf(idInmueble));
+		ResultSet respuesta=statement.executeQuery();
+		respuesta.next();
+		int i=0;
+		while(i<respuesta.getMetaData().getColumnCount()){
+			datos[i]=respuesta.getString(++i);
+		}
+		if(datos[5].equals("C")){
+			datos[5]="Casa";
+		}
+		else if(datos[5].equals("A")){
+			datos[5]="Apartamento";
+		}
+		}catch(SQLException exception){
+			System.err.println(exception.getMessage());
+		}
+		return datos;
+	}
+	public boolean ActualizarInformacionInmueble(String id,String direccion,String lugarReferencia,String tamano, String estrato,String tipo,String habitaciones,String usuario,String precio){
+		try{
+			PreparedStatement statement=getConnection().prepareStatement("update inmuebles set direccion='"+direccion+"',lugarReferencia='"+lugarReferencia+"',tamano="+tamano+",estrato="+estrato+",tipo='"+tipo+"',habitaciones="+habitaciones+",idUsuario='"+usuario+"',precio="+precio+" where id="+id);
+			statement.execute();
+			statement.close();
+			return true;
+		}catch(SQLException exception){
+			System.err.println(exception);
+			return false;
+		}
+		//return true;
+	}
+	public boolean InsertarInformacionInmueble(String id,String direccion,String lugarReferencia,String tamano, String estrato,String tipo,String habitaciones,String usuario,String precio){
+		try{
+			PreparedStatement statement=getConnection().prepareStatement("insert into inmuebles (direccion,lugarReferencia,tamano,estrato,tipo,habitaciones,idUsuario,precio) values('"+direccion+"','"+lugarReferencia+"',"+tamano+","+estrato+",'"+tipo+"',"+habitaciones+",'"+usuario+"',"+precio+")");
+			statement.execute();
+			statement.close();
+			return true;
+		}catch(SQLException exception){
+			System.err.println(exception);
+			return false;
+		}
+	}
+	public String[] getUsuariosInmueble(){
+		int registros=0;
+		try{
+			PreparedStatement statemenet=getConnection().prepareStatement("select count(*) as total from usuarios where tipo='R' or tipo='A' ");
+			ResultSet respuesta=statemenet.executeQuery();
+			respuesta.next();
+			registros=respuesta.getInt("total");
+			respuesta.close();
+			
+		}catch(SQLException exception){
+			System.err.println(exception.getMessage());
+		}
+		String[] usuarios=new String[registros+1];
+		usuarios[0]="";
+		try{
+			PreparedStatement statemenet=getConnection().prepareStatement("select usuario from usuarios where tipo='R' or tipo='A' ");
+			ResultSet respuesta=statemenet.executeQuery();
+			int i=1;
+			while(respuesta.next()){
+				usuarios[i]=respuesta.getString(1);
+				i+=1;
+			}
+		}catch(SQLException exception){
+			System.err.println(exception.getMessage());
+		}
+		return usuarios;
+	}
+}
